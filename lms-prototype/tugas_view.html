@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Tugas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dashboard">
+
+    <header>
+        <div class="logo-area">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
+            <div>
+                <h3 style="font-size: 14px; color: #d32f2f; margin:0;">UNIVERSITAS</h3>
+                <h3 style="font-size: 14px; color: #333; margin:0;">MUHAMMADIYAH MALANG</h3>
+            </div>
+        </div>
+        <button onclick="window.location.href='course.html'" class="back-btn">&larr; Kembali ke Course</button>
+    </header>
+
+    <div class="course-title">Algoritma Pemrograman (D)</div>
+    <div class="breadcrumb">
+        <a href="dashboard.html">Home</a> <span>›</span> <a href="course.html">Courses</a> <span>›</span> <span>Tugas</span>
+    </div>
+
+    <div class="section-header">Daftar Tugas</div>
+
+    <div class="task-list">
+        
+        <a href="#" class="task-item status-done" onclick="alert('Sudah dinilai!')">
+            <div class="task-left">
+                <div class="task-icon"><i class="fa-solid fa-check"></i></div>
+                <div>
+                    <strong>Tugas 1: Flowchart Dasar</strong>
+                    <div style="font-size:12px; color:#666;">Nilai: 100/100</div>
+                </div>
+            </div>
+            <span class="badge-done">Selesai</span>
+        </a>
+
+        <a href="#" class="task-item status-done">
+            <div class="task-left">
+                <div class="task-icon"><i class="fa-solid fa-check"></i></div>
+                <div>
+                    <strong>Tugas 2: Program Looping C</strong>
+                    <div style="font-size:12px; color:#666;">Nilai: 95/100</div>
+                </div>
+            </div>
+            <span class="badge-done">Selesai</span>
+        </a>
+
+        <a href="#" class="task-item status-late">
+            <div class="task-left">
+                <div class="task-icon"><i class="fa-solid fa-exclamation"></i></div>
+                <div>
+                    <strong>Tugas 3: Array & Pointer</strong>
+                    <div style="font-size:12px; color:#dc3545;">Terlewat (Ditutup)</div>
+                </div>
+            </div>
+            <span class="badge-late">Terlewat</span>
+        </a>
+
+        <a href="submission.html" class="task-item status-pending">
+            <div class="task-left">
+                <div class="task-icon"><i class="fa-solid fa-upload"></i></div>
+                <div>
+                    <strong>Tugas 5: Prototype Progress Bar</strong>
+                    <div style="font-size:12px; color:#666;">Deadline: Besok, 23:59 WIB</div>
+                </div>
+            </div>
+            <span class="badge-pending">Belum Submit</span>
+        </a>
+
+    </div>
+
+    <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
+</body>
+</html>

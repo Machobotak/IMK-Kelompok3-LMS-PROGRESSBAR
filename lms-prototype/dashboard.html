@@ -3,252 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS Dashboard - Polysynchronous Learning</title>
+    <title>LMS Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-        }
-
-        header {
-            background-color: white;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-img {
-            height: 40px;
-            width: auto;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #888;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        nav a:hover { color: #d32f2f; }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nim-text {
-            font-size: 13px;
-            color: #555;
-        }
-
-        .logout-btn {
-            background-color: #d32f2f;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .logout-btn:hover { background-color: #a00000; }
-
-        .hero {
-            background-color: #8B0000;
-            color: white;
-            padding: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 60%;
-            z-index: 2;
-        }
-
-        .hero-title-box {
-            background-color: rgba(0,0,0,0.3);
-            display: inline-block;
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #d32f2f;
-        }
-
-        .hero h1 { font-size: 24px; font-weight: 600; }
-
-        .hero p {
-            background-color: rgba(0,0,0,0.4);
-            padding: 15px;
-            border-radius: 4px;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .hero-illustration {
-            width: 200px;
-            height: 200px;
-            background: white;
-            mask-image: url('https://cdn-icons-png.flaticon.com/512/3135/3135810.png'); 
-            -webkit-mask-image: url('https://cdn-icons-png.flaticon.com/512/3135/3135810.png');
-            mask-size: contain;
-            -webkit-mask-size: contain;
-            mask-repeat: no-repeat;
-            background-color: white;
-        }
-
-        .container {
-            padding: 30px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            color: #555;
-            margin-bottom: 30px;
-            font-weight: 500;
-            font-size: 22px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            background-color: #ddd;
-        }
-
-        .card-body {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .tag {
-            background-color: #00bcd4;
-            color: white;
-            padding: 2px 8px;
-            font-size: 10px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 8px;
-            width: fit-content;
-        }
-
-        .course-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #d32f2f;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
-        .progress-wrapper {
-            margin-bottom: 15px;
-        }
-        
-        .progress-track {
-            background-color: #e0e0e0;
-            height: 8px;
-            border-radius: 4px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: #4CAF50;
-        }
-        
-        .progress-text {
-            font-size: 10px;
-            color: #888;
-            text-align: right;
-            margin-top: 2px;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 10px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .lock-icon {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .btn-access {
-            background-color: #8B0000;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            font-size: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .btn-access:hover { background-color: #600000; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
+<body class="bg-dashboard">
     <header>
         <div class="logo-area">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
@@ -257,15 +16,6 @@
                 <h3 style="font-size: 14px; color: #333; line-height: 1;">MUHAMMADIYAH MALANG</h3>
             </div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">ABOUT US</a></li>
-                <li><a href="#">GUIDE</a></li>
-                <li><a href="#">CERTIFICATES</a></li>
-                <li><a href="#">FAQ</a></li>
-            </ul>
-        </nav>
         <div class="user-info">
             <span class="nim-text" id="nimDisplay"></span>
             <button class="logout-btn" id="logoutBtn">Logout</button>
@@ -274,13 +24,8 @@
 
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-title-box">
-                <h1>Polysynchronous Learning Design</h1>
-            </div>
-            <p>
-                Model pembelajaran bauran yang dikembangkan UMM menggabungkan konsep Student Centered Learning (SCL) dan Personalized Learning (PL)
-                dengan pola interaksi polysynchronous learning untuk meningkatkan efektivitas belajar.
-            </p>
+            <div class="hero-title-box"><h1>Polysynchronous Learning Design</h1></div>
+            <p>Model pembelajaran bauran yang dikembangkan UMM menggabungkan konsep Student Centered Learning (SCL) dan Personalized Learning (PL).</p>
         </div>
         <div class="hero-illustration"></div>
     </section>
@@ -288,100 +33,21 @@
     <main class="container">
         <div style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 class="section-title">My Courses</h2>
-
             <div class="course-grid">
-                <!-- 1 -->
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1517842645767-c639042777db" class="card-img">
                     <div class="card-body">
-                        <div>
-                            <span class="tag">Informatika</span>
-                            <div class="course-name">Interaksi Manusia Komputer (D)</div>
-                        </div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
-                            <div class="progress-text">50%</div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="lock-icon">🔒</span>
-                            <button class="btn-access">Access</button>
-                        </div>
+                        <div><span class="tag">Informatika</span><div class="course-name">Interaksi Manusia Komputer (D)</div></div>
+                        <div class="progress-wrapper"><div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div><div class="progress-text">50%</div></div>
+                        <div class="card-footer"><span class="lock-icon">🔒</span><button class="btn-access">Access</button></div>
                     </div>
                 </div>
-
-                <!-- 2 -->
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb" class="card-img">
-                    <div class="card-body">
-                        <div>
-                            <span class="tag">Informatika</span>
-                            <div class="course-name">Matematika Diskrit (D)</div>
-                        </div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
-                            <div class="progress-text">10%</div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="lock-icon">🔒</span>
-                            <button class="btn-access">Access</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 -->
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f" class="card-img">
-                    <div class="card-body">
-                        <div>
-                            <span class="tag">Informatika</span>
-                            <div class="course-name">Pengantar Game (D)</div>
-                        </div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" style="width: 25%;"></div></div>
-                            <div class="progress-text">25%</div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="lock-icon">🔒</span>
-                            <button class="btn-access">Access</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4 -->
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b" class="card-img">
-                    <div class="card-body">
-                        <div>
-                            <span class="tag">Informatika</span>
-                            <div class="course-name">Pranata Cerdas (D)</div>
-                        </div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" style="width: 0%;"></div></div>
-                            <div class="progress-text">0%</div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="lock-icon">🔒</span>
-                            <button class="btn-access">Access</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5 Algoritma Pemrograman -->
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4" class="card-img">
                     <div class="card-body">
-                        <div>
-                            <span class="tag">Informatika</span>
-                            <div class="course-name">Algoritma Pemrograman (D)</div>
-                        </div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" style="width: 0%;"></div></div>
-                            <div class="progress-text">0%</div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="lock-icon">🔓</span>
-                            <button class="btn-access" onclick="window.location.href='course.html'">Access</button>
-                        </div>
+                        <div><span class="tag">Informatika</span><div class="course-name">Algoritma Pemrograman (D)</div></div>
+                        <div class="progress-wrapper"><div class="progress-track"><div class="progress-fill" style="width: 45%;"></div></div><div class="progress-text">45%</div></div>
+                        <div class="card-footer"><span class="lock-icon">🔓</span><button class="btn-access" onclick="window.location.href='course.html'">Access</button></div>
                     </div>
                 </div>
             </div>
@@ -389,20 +55,9 @@
     </main>
 
     <script>
-        // Ambil NIM dari localStorage
         const nim = localStorage.getItem("nim");
-        const nimDisplay = document.getElementById("nimDisplay");
-        if (nim) {
-            nimDisplay.textContent = `NIM: ${nim}`;
-        } else {
-            window.location.href = "index.html";
-        }
-
-        // Logout
-        document.getElementById("logoutBtn").addEventListener("click", () => {
-            localStorage.removeItem("nim");
-            window.location.href = "index.html";
-        });
+        if(nim) document.getElementById("nimDisplay").innerText = "NIM: " + nim;
+        document.getElementById("logoutBtn").addEventListener("click", () => { localStorage.removeItem("nim"); window.location.href = "index.html"; });
     </script>
 </body>
 </html>
