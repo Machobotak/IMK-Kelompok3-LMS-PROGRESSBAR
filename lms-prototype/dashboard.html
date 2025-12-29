@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-dashboard">
+
     <header>
         <div class="logo-area">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
@@ -34,69 +35,78 @@
         <div style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 class="section-title">My Courses</h2>
             <div class="course-grid">
+                
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1517842645767-c639042777db" class="card-img">
                     <div class="card-body">
                         <div><span class="tag">Informatika</span><div class="course-name">Interaksi Manusia Komputer (D)</div></div>
-                        <div class="progress-wrapper"><div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div><div class="progress-text">50%</div></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
+                            <div class="progress-text">50%</div>
+                        </div>
                         <div class="card-footer"><span class="lock-icon">🔒</span><button class="btn-access">Access</button></div>
                     </div>
                 </div>
-                <div class="card">
+
+                <div class="card" id="cardAlgo">
                     <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4" class="card-img">
                     <div class="card-body">
                         <div><span class="tag">Informatika</span><div class="course-name">Algoritma Pemrograman (D)</div></div>
-                        <div class="progress-wrapper"><div class="progress-track"><div class="progress-fill" style="width: 0%;"></div></div><div class="progress-text">0%</div></div>
-                        <div class="card-footer"><span class="lock-icon">🔓</span><button class="btn-access" onclick="window.location.href='course.html'">Access</button></div>
+                        <div class="progress-wrapper">
+                            <div class="progress-track"><div class="progress-fill" id="algoProgressFill" style="width: 0%;"></div></div>
+                            <div class="progress-text" id="algoProgressText">0%</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="lock-icon">🔓</span>
+                            <button class="btn-access" onclick="window.location.href='course.html'">Access</button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
 
-    <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Algoritma Pemrograman (D)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-dashboard">
+    <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
 
-  <header>
-    <div class="logo-area">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
-      <div>
-        <h3 style="font-size: 14px; color: #d32f2f; margin:0;">UNIVERSITAS</h3>
-        <h3 style="font-size: 14px; color: #333; margin:0;">MUHAMMADIYAH MALANG</h3>
-      </div>
-    </div>
-    <button class="back-btn" onclick="window.location.href='dashboard.html'">← Kembali</button>
-  </header>
-   <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
-
-  <script>
+   <script>
     window.onload = function() {
-        // Tampilkan NIM dari login
+        // Init (NIM, dll)
         const nim = localStorage.getItem("nim");
-        if(nim) document.getElementById("nimDisplay").innerText = "NIM: " + nim;
+        if(nim && document.getElementById("nimDisplay")) document.getElementById("nimDisplay").innerText = "NIM: " + nim;
+        
+        if(document.getElementById("logoutBtn")) {
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+                localStorage.clear(); window.location.href = "index.html";
+            });
+        }
 
-        // Cek status tugas 5 untuk update progress bar
-        if (localStorage.getItem("tugas5Status") === "selesai") {
-            // Asumsi kartu Algoritma Pemrograman adalah kartu ke-2
-            const algoprogCard = document.querySelectorAll('.card')[1]; 
-            const progressFill = algoprogCard.querySelector('.progress-fill');
-            const progressText = algoprogCard.querySelector('.progress-text');
+        // === HITUNG PROGRESS BAR ===
+        let completedCount = 0;
+        const totalTasks = 3;
+
+        for (let i = 1; i <= 3; i++) {
+            const s = localStorage.getItem("status_tugas" + i);
+            // Kita hitung 'done' (tepat waktu) dan 'late' (terlambat) sebagai SELESAI
+            if (s === "done" || s === "late") {
+                completedCount++;
+            }
+        }
+
+        const persen = Math.round((completedCount / totalTasks) * 100);
+
+        // Update UI
+        const fill = document.getElementById("algoProgressFill") || document.getElementById("courseProgressFill");
+        const text = document.getElementById("algoProgressText") || document.getElementById("courseProgressText");
+
+        if (fill && text) {
+            fill.style.width = persen + "%";
+            text.innerText = persen + "%";
             
-            progressFill.style.width = "75%";
-            progressText.innerText = "75%";
+            // Ubah warna bar jadi hijau penuh jika 100%
+            if(persen === 100) fill.style.backgroundColor = "#28a745";
         }
     };
 </script>
-</body>
-</html>
-    
 </body>
 </html>

@@ -6,7 +6,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* === 1. HALAMAN LOGIN (index.html) === */
+/* === 1. HALAMAN LOGIN === */
 .bg-login {
   background: url('https://umm.ac.id/files/image/umm%20heart.jpg') no-repeat center center/cover;
   height: 100vh;
@@ -57,7 +57,7 @@
   background-color: #8b0000;
 }
 
-/* === 2. GLOBAL DASHBOARD LAYOUT (Semua halaman setelah login) === */
+/* === 2. DASHBOARD LAYOUT === */
 .bg-dashboard {
   background-color: #f4f6f9;
   color: #333;
@@ -86,24 +86,6 @@ header {
   width: auto;
 }
 
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #888;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-nav a:hover {
-  color: #d32f2f;
-}
-
-/* User Info */
 .user-info {
   display: flex;
   align-items: center;
@@ -130,7 +112,7 @@ nav a:hover {
   background-color: #a00000;
 }
 
-/* Hero Section (Merah) */
+/* Hero Section */
 .hero {
   background-color: #8B0000;
   color: white;
@@ -181,7 +163,7 @@ nav a:hover {
   background-color: white;
 }
 
-/* Container Utama */
+/* Container */
 .container {
   padding: 30px 40px;
   max-width: 1400px;
@@ -198,7 +180,7 @@ nav a:hover {
   padding-bottom: 10px;
 }
 
-/* === 3. DASHBOARD CARDS (dashboard.html) === */
+/* Cards */
 .course-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -272,6 +254,7 @@ nav a:hover {
 .progress-fill {
   height: 100%;
   background-color: #4CAF50;
+  transition: width 0.5s ease;
 }
 
 .progress-text {
@@ -308,7 +291,7 @@ nav a:hover {
   background-color: #600000;
 }
 
-/* === 4. HALAMAN DETAIL COURSE (course.html) === */
+/* === 3. COURSE DETAIL === */
 .course-title {
   background-color: #8B0000;
   color: white;
@@ -383,7 +366,7 @@ nav a:hover {
   background-color: #a00000;
 }
 
-/* === 5. HALAMAN LIST TUGAS (tugas_view.html) === */
+/* === 4. TASK LIST (BAGIAN INI YANG HILANG DI PUNYAMU) === */
 .task-list {
   display: flex;
   flex-direction: column;
@@ -442,7 +425,7 @@ nav a:hover {
   max-width: 1000px;
 }
 
-/* Status Warna Tugas */
+/* WARNA: HIJAU (Selesai) */
 .status-done {
   border-left-color: #28a745;
 }
@@ -461,6 +444,7 @@ nav a:hover {
   font-weight: 600;
 }
 
+/* WARNA: KUNING (Pending) */
 .status-pending {
   border-left-color: #ffc107;
 }
@@ -479,6 +463,7 @@ nav a:hover {
   font-weight: 600;
 }
 
+/* WARNA: MERAH (Telat) */
 .status-late {
   border-left-color: #dc3545;
 }

@@ -30,54 +30,113 @@
 
     <div class="task-list">
         
-        <a href="submission.html" class="task-item status-pending">
+        <a href="submitTugas.html?id=1" class="task-item" id="task-1">
             <div class="task-left">
                 <div class="task-icon"><i class="fa-solid fa-upload"></i></div>
                 <div>
                     <strong>Tugas 1: Flowchart Dasar</strong>
+                    <div style="font-size:12px; color:#666;">Deadline: 1 Minggu Lalu</div>
+                </div>
+            </div>
+            <span class="badge-pending">Loading...</span>
+        </a>
+
+        <a href="submitTugas.html?id=2" class="task-item" id="task-2">
+            <div class="task-left">
+                <div class="task-icon"><i class="fa-solid fa-upload"></i></div>
+                <div>
+                    <strong>Tugas 2: Looping & Array</strong>
+                    <div style="font-size:12px; color:#666;">Deadline: Kemarin</div>
+                </div>
+            </div>
+            <span class="badge-pending">Loading...</span>
+        </a>
+
+        <a href="submitTugas.html?id=3" class="task-item" id="task-3">
+            <div class="task-left">
+                <div class="task-icon"><i class="fa-solid fa-upload"></i></div>
+                <div>
+                    <strong>Tugas 3: Pointer & Struct</strong>
                     <div style="font-size:12px; color:#666;">Deadline: Besok, 23:59 WIB</div>
                 </div>
             </div>
-            <span class="badge-pending">Belum Submit</span>
+            <span class="badge-pending">Loading...</span>
         </a>
 
-        <div id="tugas5-container">
-    <a href="SubmitTugas.html" class="task-item status-pending" id="tugas5-link">
-        <div class="task-left">
-            <div class="task-icon" id="tugas5-icon"><i class="fa-solid fa-upload"></i></div>
-            <div class="task-info">
-                <strong>Tugas 5: Prototype Progress Bar</strong>
-                <span id="tugas5-text">Deadline: Besok, 23:59 WIB</span>
-            </div>
-        </div>
-        <span class="badge-pending" id="tugas5-badge">Belum Submit</span>
-    </a>
-</div>
-
-<script>
-    window.onload = function() {
-        if (localStorage.getItem("tugas5Status") === "selesai") {
-            const link = document.getElementById("tugas5-link");
-            const icon = document.getElementById("tugas5-icon");
-            const badge = document.getElementById("tugas5-badge");
-            const text = document.getElementById("tugas5-text");
-
-            // Ubah tampilan ke status SELESAI (Hijau)
-            link.className = "task-item status-done";
-            icon.innerHTML = '<i class="fa-solid fa-check"></i>';
-            icon.style.backgroundColor = "#e8f5e9";
-            icon.style.color = "#28a745";
-            
-            badge.innerText = "Selesai";
-            badge.className = "badge-done";
-            
-            text.innerText = "Sudah Disubmit";
-        }
-    };
-</script>
-
-        </div>
+    </div>
 
     <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
+
+    <script>
+        window.onload = function() {
+            // === AUTO INIT (Hanya jalan sekali saat pertama buka) ===
+            if (!localStorage.getItem("init_done_v2")) {
+                localStorage.setItem("status_tugas1", "done");    // Hijau (Sudah)
+                localStorage.setItem("status_tugas2", "overdue");// Merah (Telat Belum Kumpul)
+                localStorage.setItem("status_tugas3", "pending"); // Kuning (Belum)
+                
+                localStorage.setItem("init_done_v2", "true"); 
+                // Hitung progress awal (Hanya Tugas 1 yg selesai = 33%)
+                localStorage.setItem("algoProgress", "33"); 
+            }
+
+            // === RENDER TAMPILAN ===
+            for (let i = 1; i <= 3; i++) {
+                const status = localStorage.getItem("status_tugas" + i) || "pending";
+                updateUI(i, status);
+            }
+        };
+
+        function updateUI(id, status) {
+            const item = document.getElementById("task-" + id);
+            const icon = item.querySelector(".task-icon");
+            const badge = item.querySelector("span");
+
+            // Reset Class
+            item.className = "task-item";
+            icon.style = ""; // Reset inline style
+            
+            if (status === "done") {
+                // HIJAU (Selesai Tepat Waktu)
+                item.classList.add("status-done");
+                icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+                badge.className = "badge-done";
+                badge.innerText = "Selesai";
+
+            } else if (status === "late") {
+                // MERAH (Selesai TAPI Terlambat) -> Request User: "Warnanya tetap merah"
+                item.classList.add("status-late"); // Class merah
+                icon.innerHTML = '<i class="fa-solid fa-check"></i>'; // Ikon Centang
+                badge.className = "badge-late";
+                badge.innerText = "Selesai (Terlambat)";
+
+            } else if (status === "overdue") {
+                // MERAH (Belum Kumpul & Sudah Lewat)
+                item.classList.add("status-late"); // Pakai style merah yg sama
+                icon.innerHTML = '<i class="fa-solid fa-exclamation"></i>'; // Ikon Tanda Seru
+                badge.className = "badge-late";
+                badge.innerText = "Terlambat (Belum Submit)";
+
+            } else {
+                // KUNING (Belum)
+                item.classList.add("status-pending");
+                icon.innerHTML = '<i class="fa-solid fa-upload"></i>';
+                badge.className = "badge-pending";
+                badge.innerText = "Belum Submit";
+            }
+        }
+    </script>
+
+    <button onclick="resetData()" style="position:fixed; bottom:20px; right:20px; background:red; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer; z-index:999;">
+   🔄 Reset Semua Data
+</button>
+
+<script>
+    function resetData() {
+        localStorage.clear();
+        alert("Data berhasil di-reset! Halaman akan dimuat ulang.");
+        location.reload();
+    }
+</script>
 </body>
 </html>
