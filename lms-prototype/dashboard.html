@@ -6,7 +6,6 @@
     <title>LMS Dashboard - Polysynchronous Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- RESET CSS --- */
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +18,6 @@
             color: #333;
         }
 
-        /* --- HEADER / NAVBAR --- */
         header {
             background-color: white;
             padding: 15px 40px;
@@ -36,7 +34,7 @@
         }
 
         .logo-img {
-            height: 40px; /* Placeholder untuk Logo UMM */
+            height: 40px;
             width: auto;
         }
 
@@ -55,16 +53,31 @@
 
         nav a:hover { color: #d32f2f; }
 
-        .user-profile {
-            width: 35px;
-            height: 35px;
-            background-color: #ddd;
-            border-radius: 50%;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* --- HERO SECTION (BAGIAN MERAH) --- */
+        .nim-text {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .logout-btn {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .logout-btn:hover { background-color: #a00000; }
+
         .hero {
-            background-color: #8B0000; /* Merah Marun UMM */
+            background-color: #8B0000;
             color: white;
             padding: 40px;
             display: flex;
@@ -98,11 +111,10 @@
             font-size: 14px;
         }
 
-        /* Ilustrasi Wisuda (Menggunakan CSS Shapes Sederhana sebagai placeholder) */
         .hero-illustration {
             width: 200px;
             height: 200px;
-            background: white; /* Ganti dengan gambar PNG transparan wisudawan */
+            background: white;
             mask-image: url('https://cdn-icons-png.flaticon.com/512/3135/3135810.png'); 
             -webkit-mask-image: url('https://cdn-icons-png.flaticon.com/512/3135/3135810.png');
             mask-size: contain;
@@ -111,7 +123,6 @@
             background-color: white;
         }
 
-        /* --- MAIN CONTENT --- */
         .container {
             padding: 30px 40px;
             max-width: 1400px;
@@ -128,15 +139,12 @@
             padding-bottom: 10px;
         }
 
-        /* --- COURSE GRID --- */
         .course-grid {
             display: grid;
-            /* Membuat grid otomatis: minimal lebar 250px, sisanya menyesuaikan */
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 25px;
         }
 
-        /* --- CARD DESIGN --- */
         .card {
             background: white;
             border: 1px solid #eee;
@@ -169,7 +177,7 @@
         }
 
         .tag {
-            background-color: #00bcd4; /* Biru Cyan */
+            background-color: #00bcd4;
             color: white;
             padding: 2px 8px;
             font-size: 10px;
@@ -184,12 +192,11 @@
         .course-name {
             font-size: 14px;
             font-weight: 600;
-            color: #d32f2f; /* Judul Merah */
+            color: #d32f2f;
             margin-bottom: 15px;
             line-height: 1.4;
         }
 
-        /* Progress Bar Style */
         .progress-wrapper {
             margin-bottom: 15px;
         }
@@ -204,7 +211,7 @@
 
         .progress-fill {
             height: 100%;
-            background-color: #4CAF50; /* Hijau Progress */
+            background-color: #4CAF50;
         }
         
         .progress-text {
@@ -214,7 +221,6 @@
             margin-top: 2px;
         }
 
-        /* Card Footer */
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -239,7 +245,6 @@
         }
 
         .btn-access:hover { background-color: #600000; }
-
     </style>
 </head>
 <body>
@@ -261,7 +266,11 @@
                 <li><a href="#">FAQ</a></li>
             </ul>
         </nav>
-        <div class="user-profile"></div> </header>
+        <div class="user-info">
+            <span class="nim-text" id="nimDisplay"></span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+    </header>
 
     <section class="hero">
         <div class="hero-content">
@@ -269,35 +278,30 @@
                 <h1>Polysynchronous Learning Design</h1>
             </div>
             <p>
-                Model pembelajaran bauran yang dikembangkan UMM yang menggabungkan konsep Student Centered Learning (SCL) dan Personalized Learning (PL) dengan pola interaksi polysynchronous learning, sehingga diharapkan lebih efektif dalam penerapan kegiatan belajar mengajar.
+                Model pembelajaran bauran yang dikembangkan UMM menggabungkan konsep Student Centered Learning (SCL) dan Personalized Learning (PL)
+                dengan pola interaksi polysynchronous learning untuk meningkatkan efektivitas belajar.
             </p>
         </div>
-        <div class="hero-illustration">
-            </div>
+        <div class="hero-illustration"></div>
     </section>
 
     <main class="container">
-        
         <div style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h2 class="section-title">My courses</h2>
+            <h2 class="section-title">My Courses</h2>
 
             <div class="course-grid">
-
+                <!-- 1 -->
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img" alt="Course Image">
+                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db" class="card-img">
                     <div class="card-body">
                         <div>
                             <span class="tag">Informatika</span>
                             <div class="course-name">Interaksi Manusia Komputer (D)</div>
                         </div>
-                        
                         <div class="progress-wrapper">
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 50%;"></div>
-                            </div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
                             <div class="progress-text">50%</div>
                         </div>
-
                         <div class="card-footer">
                             <span class="lock-icon">🔒</span>
                             <button class="btn-access">Access</button>
@@ -305,21 +309,18 @@
                     </div>
                 </div>
 
+                <!-- 2 -->
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img" alt="Course Image">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb" class="card-img">
                     <div class="card-body">
                         <div>
                             <span class="tag">Informatika</span>
                             <div class="course-name">Matematika Diskrit (D)</div>
                         </div>
-                        
                         <div class="progress-wrapper">
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 10%;"></div>
-                            </div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
                             <div class="progress-text">10%</div>
                         </div>
-
                         <div class="card-footer">
                             <span class="lock-icon">🔒</span>
                             <button class="btn-access">Access</button>
@@ -327,21 +328,18 @@
                     </div>
                 </div>
 
+                <!-- 3 -->
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img" alt="Course Image">
+                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f" class="card-img">
                     <div class="card-body">
                         <div>
                             <span class="tag">Informatika</span>
                             <div class="course-name">Pengantar Game (D)</div>
                         </div>
-                        
                         <div class="progress-wrapper">
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 25%;"></div>
-                            </div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 25%;"></div></div>
                             <div class="progress-text">25%</div>
                         </div>
-
                         <div class="card-footer">
                             <span class="lock-icon">🔒</span>
                             <button class="btn-access">Access</button>
@@ -349,21 +347,18 @@
                     </div>
                 </div>
 
+                <!-- 4 -->
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img" alt="Course Image">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b" class="card-img">
                     <div class="card-body">
                         <div>
                             <span class="tag">Informatika</span>
                             <div class="course-name">Pranata Cerdas (D)</div>
                         </div>
-                        
                         <div class="progress-wrapper">
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 0%;"></div>
-                            </div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 0%;"></div></div>
                             <div class="progress-text">0%</div>
                         </div>
-
                         <div class="card-footer">
                             <span class="lock-icon">🔒</span>
                             <button class="btn-access">Access</button>
@@ -371,31 +366,43 @@
                     </div>
                 </div>
 
-                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img" alt="Course Image">
+                <!-- 5 Algoritma Pemrograman -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4" class="card-img">
                     <div class="card-body">
                         <div>
                             <span class="tag">Informatika</span>
                             <div class="course-name">Algoritma Pemrograman (D)</div>
                         </div>
-                        
                         <div class="progress-wrapper">
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 0%;"></div>
-                            </div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 0%;"></div></div>
                             <div class="progress-text">0%</div>
                         </div>
-
                         <div class="card-footer">
-                            <span class="lock-icon">🔒</span>
-                            <button class="btn-access">Access</button>
+                            <span class="lock-icon">🔓</span>
+                            <button class="btn-access" onclick="window.location.href='course.html'">Access</button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
 
+    <script>
+        // Ambil NIM dari localStorage
+        const nim = localStorage.getItem("nim");
+        const nimDisplay = document.getElementById("nimDisplay");
+        if (nim) {
+            nimDisplay.textContent = `NIM: ${nim}`;
+        } else {
+            window.location.href = "index.html";
+        }
+
+        // Logout
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("nim");
+            window.location.href = "index.html";
+        });
+    </script>
 </body>
 </html>

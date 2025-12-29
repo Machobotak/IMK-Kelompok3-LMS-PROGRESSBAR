@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algoritma Pemrograman (D) - LMS UMM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      color: #666;
+      margin: 20px 40px;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+      color: #d32f2f;
+    }
+
+    .breadcrumb span {
+      margin: 0 5px;
+    }
+
+    .course-title {
+      background-color: #8B0000;
+      color: white;
+      padding: 20px 40px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .content-section {
+      display: flex;
+      justify-content: space-around;
+      margin: 40px;
+      gap: 20px;
+    }
+
+    .box {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      width: 45%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .box h3 {
+      color: #d32f2f;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .box h3::before {
+      content: "💻";
+      font-size: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+      background-color: #fafafa;
+    }
+
+    .progress-container {
+      margin-top: 25px;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .progress-track {
+      background-color: #e0e0e0;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 45%;
+      background-color: #4CAF50;
+      border-radius: 5px;
+    }
+
+    .back-btn {
+      background-color: #8B0000;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      margin-left: 40px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .back-btn:hover { background-color: #a00000; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-area">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
+      <div>
+        <h3 style="font-size: 14px; color: #d32f2f; line-height: 1;">UNIVERSITAS</h3>
+        <h3 style="font-size: 14px; color: #333; line-height: 1;">MUHAMMADIYAH MALANG</h3>
+      </div>
+    </div>
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">← Kembali</button>
+  </header>
+
+  <div class="course-title">Algoritma Pemrograman (D)</div>
+
+  <div class="breadcrumb">
+    <a href="#">Home</a> <span>›</span>
+    <a href="#">Courses</a> <span>›</span>
+    <a href="#">Fakultas Teknik</a> <span>›</span>
+    <a href="#">Informatika</a> <span>›</span>
+    Algoritma Pemrograman (D)
+  </div>
+
+  <div class="content-section">
+    <div class="box">
+      <h3>Materi</h3>
+      <p>- Pengantar Algoritma dan Flowchart</p>
+      <p>- Struktur Kontrol (Percabangan dan Perulangan)</p>
+      <p>- Fungsi dan Prosedur</p>
+      <p>- Array dan Pointer</p>
+    </div>
+
+    <div class="box">
+      <h3>Tugas</h3>
+      <p>1️⃣ Tugas 1: Buat flowchart menghitung nilai rata-rata</p>
+      <p>2️⃣ Tugas 2: Program C sederhana dengan looping</p>
+      <p>3️⃣ Tugas 3: Implementasi fungsi dengan parameter</p>
+
+      <div class="progress-container">
+        <div class="progress-label">Progress Tugas</div>
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+        <div style="font-size: 12px; color: #777; margin-top: 4px;">45% selesai</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Universitas Muhammadiyah Malang | <a href="https://www.umm.ac.id/" style="color:#d32f2f; text-decoration:none;">www.umm.ac.id</a> | +62 341 464 318
+  </footer>
+
+</body>
+</html>
