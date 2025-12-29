@@ -37,23 +37,29 @@
     <div class="box">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <h3>
-        <a href="tugas_view.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px; width: 100%;">
-          Tugas <span style="font-size: 12px; color: #888; margin-left: auto; font-weight: normal;"></span>
-        </a>
-      </h3>      
-    </div>
+          <a href="tugas_view.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px; width: 100%;">
+            Tugas <span style="font-size: 12px; color: #888; margin-left: auto; font-weight: normal;">Lihat Semua</span>
+          </a>
+        </h3>      
+      </div>
       
       <p>1️⃣ Tugas 1: Buat flowchart menghitung nilai rata-rata</p>
       <p>2️⃣ Tugas 2: Program C sederhana dengan looping</p>
 
       <div class="progress-wrapper">
-        <div style="font-size:12px; margin-bottom:5px;">Progress Tugas</div>
-        <div class="progress-track"><div class="progress-fill" style="width: 0%;"></div></div>
-        <div style="font-size: 12px; color: #777; margin-top: 4px;"></div>
-      </div>
-    </div>
-  </div>
+    <div style="font-size:12px; margin-bottom:5px;">Progress Tugas</div>
+    <div class="progress-track" style="background: #eee; height: 10px; border-radius: 5px;">
+    <div id="courseProgressFill" style="width: 50%; height: 100%; background: #28a745; transition: 0.5s;"></div>
+</div>
+<div id="courseProgressText" style="font-size:12px; text-align:right;">50%</div>
 
-  <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
+<script>
+    window.onload = function() {
+        if (localStorage.getItem("tugas5Status") === "selesai") {
+            document.getElementById("courseProgressFill").style.width = "75%";
+            document.getElementById("courseProgressText").innerText = "75%";
+        }
+    };
+</script>
 </body>
 </html>

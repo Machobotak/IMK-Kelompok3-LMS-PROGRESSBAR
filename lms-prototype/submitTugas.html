@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Status - Tugas 5</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h2 { font-weight: 400; color: #455a64; margin-bottom: 25px; }
+        
+        .status-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .status-table td { padding: 12px 15px; border: 1px solid #dee2e6; font-size: 14px; }
+        .label-cell { width: 250px; background-color: #f1f3f5; font-weight: 600; color: #495057; }
+        .bg-warning-light { background-color: #fff3cd !important; }
+
+        /* Button Group */
+        .btn-group { display: flex; justify-content: center; gap: 12px; margin-top: 25px; }
+        .btn-custom { 
+            background-color: #dee2e6; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            color: #495057; 
+            cursor: pointer; 
+            font-weight: 500;
+        }
+        .btn-custom:hover { background-color: #ced4da; }
+
+        .file-link { color: #d32f2f; text-decoration: none; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Submission status</h2>
+    <table class="status-table">
+        <tr class="bg-warning-light">
+            <td class="label-cell">Submission status</td>
+            <td>Submitted for grading</td>
+        </tr>
+        <tr>
+            <td class="label-cell">Grading status</td>
+            <td>Not graded</td>
+        </tr>
+        <tr>
+            <td class="label-cell">Due date</td>
+            <td>Saturday, 8 March 2025, 11:59 PM</td>
+        </tr>
+        <tr class="bg-warning-light">
+            <td class="label-cell">Time remaining</td>
+            <td>Assignment was submitted 7 days 7 hours early</td>
+        </tr>
+        <tr>
+            <td class="label-cell">Last modified</td>
+            <td>Monday, 29 December 2025, 12:21 PM</td>
+        </tr>
+        <tr>
+            <td class="label-cell">File submissions</td>
+            <td>
+                <a href="#" class="file-link"><i class="fa-solid fa-file-pdf"></i> Tugas5_Prototype_ProgressBar_RonaldAditya.pdf</a>
+            </td>
+        </tr>
+    </table>
+
+    <div class="btn-group">
+    <button class="btn-custom">Edit submission</button>
+    <button class="btn-custom" onclick="removeTugas()">Remove submission</button>
+    <button class="btn-custom" onclick="submitTugas()">Submit submission</button>
+</div>
+
+<script>
+    // Fungsi Submit (Sudah ada sebelumnya)
+    function submitTugas() {
+        alert("Tugas berhasil tersubmit!");
+        localStorage.setItem("tugas5Status", "selesai");
+        window.location.href = "tugas_view.html";
+    }
+
+    // FUNGSI BARU: Remove Submission
+    function removeTugas() {
+        if (confirm("Apakah Anda yakin ingin menghapus submission ini?")) {
+            // Menghapus status tugas 5 dari memori browser
+            localStorage.removeItem("tugas5Status");
+            
+            alert("Submission telah dihapus.");
+            
+            // Redirect kembali ke daftar tugas
+            // Sekarang statusnya akan kembali menjadi "Belum Submit"
+            // Dan Progress Bar di Dashboard/Course akan kembali ke 50%
+            window.location.href = "tugas_view.html";
+        }
+    }
+</script>
+
+</body>
+</html>

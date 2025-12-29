@@ -41,16 +41,40 @@
             <span class="badge-pending">Belum Submit</span>
         </a>
 
-        <a href="submission.html" class="task-item status-pending">
-            <div class="task-left">
-                <div class="task-icon"><i class="fa-solid fa-upload"></i></div>
-                <div>
-                    <strong>Tugas 2: Program Looping C</strong>
-                    <div style="font-size:12px; color:#666;">Deadline: Besok, 23:59 WIB</div>
-                </div>
+        <div id="tugas5-container">
+    <a href="SubmitTugas.html" class="task-item status-pending" id="tugas5-link">
+        <div class="task-left">
+            <div class="task-icon" id="tugas5-icon"><i class="fa-solid fa-upload"></i></div>
+            <div class="task-info">
+                <strong>Tugas 5: Prototype Progress Bar</strong>
+                <span id="tugas5-text">Deadline: Besok, 23:59 WIB</span>
             </div>
-            <span class="badge-pending">Belum Submit</span>
-        </a>
+        </div>
+        <span class="badge-pending" id="tugas5-badge">Belum Submit</span>
+    </a>
+</div>
+
+<script>
+    window.onload = function() {
+        if (localStorage.getItem("tugas5Status") === "selesai") {
+            const link = document.getElementById("tugas5-link");
+            const icon = document.getElementById("tugas5-icon");
+            const badge = document.getElementById("tugas5-badge");
+            const text = document.getElementById("tugas5-text");
+
+            // Ubah tampilan ke status SELESAI (Hijau)
+            link.className = "task-item status-done";
+            icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+            icon.style.backgroundColor = "#e8f5e9";
+            icon.style.color = "#28a745";
+            
+            badge.innerText = "Selesai";
+            badge.className = "badge-done";
+            
+            text.innerText = "Sudah Disubmit";
+        }
+    };
+</script>
 
         </div>
 
