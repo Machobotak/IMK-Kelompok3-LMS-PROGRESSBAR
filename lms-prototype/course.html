@@ -35,31 +35,61 @@
     </div>
 
     <div class="box">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3>
-          <a href="tugas_view.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px; width: 100%;">
-            Tugas <span style="font-size: 12px; color: #888; margin-left: auto; font-weight: normal;">Lihat Semua</span>
-          </a>
-        </h3>      
-      </div>
+      <h3>
+        <a href="tugas_view.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px; width: 100%;">
+            Tugas <span style="font-size: 12px; color: #888; margin-left: auto; font-weight: normal;">(Klik detail) &rarr;</span>
+        </a>
+      </h3>
       
       <p>1️⃣ Tugas 1: Buat flowchart menghitung nilai rata-rata</p>
       <p>2️⃣ Tugas 2: Program C sederhana dengan looping</p>
 
       <div class="progress-wrapper">
-    <div style="font-size:12px; margin-bottom:5px;">Progress Tugas</div>
-    <div class="progress-track" style="background: #eee; height: 10px; border-radius: 5px;">
-    <div id="courseProgressFill" style="width: 50%; height: 100%; background: #28a745; transition: 0.5s;"></div>
-</div>
-<div id="courseProgressText" style="font-size:12px; text-align:right;">50%</div>
+        <div style="font-size:12px; margin-bottom:5px;">Progress Tugas</div>
+        <div class="progress-track" style="background: #eee; height: 10px; border-radius: 5px;">
+            <div id="courseProgressFill" style="width: 0%; height: 100%; background: #28a745; transition: 0.5s;"></div>
+        </div>
+        <div id="courseProgressText" style="font-size:12px; text-align:right;">0%</div>
+      </div>
+    </div>
+  </div>
 
-<script>
+  <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
+
+  <script>
     window.onload = function() {
-        if (localStorage.getItem("tugas5Status") === "selesai") {
-            document.getElementById("courseProgressFill").style.width = "75%";
-            document.getElementById("courseProgressText").innerText = "75%";
+        // Init (NIM, dll)
+        const nim = localStorage.getItem("nim");
+        if(nim && document.getElementById("nimDisplay")) document.getElementById("nimDisplay").innerText = "NIM: " + nim;
+        
+        if(document.getElementById("logoutBtn")) {
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+                localStorage.clear(); window.location.href = "index.html";
+            });
+        }
+
+        // === HITUNG PROGRESS BAR ===
+        let completedCount = 0;
+        const totalTasks = 3;
+
+        for (let i = 1; i <= 3; i++) {
+            const s = localStorage.getItem("status_tugas" + i);
+            if (s === "done" || s === "late") {
+                completedCount++;
+            }
+        }
+
+        const persen = Math.round((completedCount / totalTasks) * 100);
+
+        const fill = document.getElementById("courseProgressFill");
+        const text = document.getElementById("courseProgressText");
+
+        if (fill && text) {
+            fill.style.width = persen + "%";
+            text.innerText = persen + "%";
+            if(persen === 100) fill.style.backgroundColor = "#28a745";
         }
     };
-</script>
+  </script>
 </body>
 </html>

@@ -3,96 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submission Status - Tugas 5</title>
+    <title>Submission Status</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
-        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         h2 { font-weight: 400; color: #455a64; margin-bottom: 25px; }
         
         .status-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
         .status-table td { padding: 12px 15px; border: 1px solid #dee2e6; font-size: 14px; }
         .label-cell { width: 250px; background-color: #f1f3f5; font-weight: 600; color: #495057; }
-        .bg-warning-light { background-color: #fff3cd !important; }
+        
+        /* Warna Tabel */
+        .bg-success-light { background-color: #d4edda !important; color: #155724; }
+        .bg-danger-light { background-color: #f8d7da !important; color: #721c24; }
+        .bg-warning-light { background-color: #fff3cd !important; color: #856404; }
 
-        /* Button Group */
         .btn-group { display: flex; justify-content: center; gap: 12px; margin-top: 25px; }
         .btn-custom { 
-            background-color: #dee2e6; 
-            border: none; 
-            padding: 10px 20px; 
-            border-radius: 4px; 
-            font-size: 14px; 
-            color: #495057; 
-            cursor: pointer; 
-            font-weight: 500;
+            background-color: #dee2e6; border: none; padding: 10px 20px; border-radius: 4px; 
+            font-size: 14px; color: #495057; cursor: pointer; font-weight: 500; transition: 0.2s;
         }
         .btn-custom:hover { background-color: #ced4da; }
+        .btn-submit { background-color: #28a745; color: white; }
+        .btn-submit:hover { background-color: #218838; }
+        .btn-remove { background-color: #dc3545; color: white; }
+        .btn-remove:hover { background-color: #c82333; }
 
-        .file-link { color: #d32f2f; text-decoration: none; font-weight: 500; }
+        .file-link { color: #d32f2f; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .back-link { text-decoration: none; color: #666; font-size: 14px; margin-bottom: 15px; display: inline-block; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Submission status</h2>
+    <a href="tugas_view.html" class="back-link">&larr; Kembali ke Daftar Tugas</a>
+
+    <h2 id="taskTitle">Submission status</h2>
+    
     <table class="status-table">
-        <tr class="bg-warning-light">
-            <td class="label-cell">Submission status</td>
-            <td>Submitted for grading</td>
-        </tr>
         <tr>
-            <td class="label-cell">Grading status</td>
-            <td>Not graded</td>
+            <td class="label-cell">Submission status</td>
+            <td id="statusCell" class="bg-warning-light">No attempt</td>
         </tr>
         <tr>
             <td class="label-cell">Due date</td>
-            <td>Saturday, 8 March 2025, 11:59 PM</td>
-        </tr>
-        <tr class="bg-warning-light">
-            <td class="label-cell">Time remaining</td>
-            <td>Assignment was submitted 7 days 7 hours early</td>
-        </tr>
-        <tr>
-            <td class="label-cell">Last modified</td>
-            <td>Monday, 29 December 2025, 12:21 PM</td>
+            <td id="dueDateCell">-</td>
         </tr>
         <tr>
             <td class="label-cell">File submissions</td>
-            <td>
-                <a href="#" class="file-link"><i class="fa-solid fa-file-pdf"></i> Tugas5_Prototype_ProgressBar_RonaldAditya.pdf</a>
-            </td>
+            <td id="fileCell"><span style="color:#888;">(No file uploaded)</span></td>
         </tr>
     </table>
 
     <div class="btn-group">
-    <button class="btn-custom">Edit submission</button>
-    <button class="btn-custom" onclick="removeTugas()">Remove submission</button>
-    <button class="btn-custom" onclick="submitTugas()">Submit submission</button>
+        <button class="btn-custom">Edit submission</button>
+        <button class="btn-custom btn-remove" onclick="removeTugas()">Remove submission</button>
+        <button class="btn-custom btn-submit" onclick="submitTugas()">Submit submission</button>
+    </div>
 </div>
 
 <script>
-    // Fungsi Submit (Sudah ada sebelumnya)
+    // 1. Ambil ID Tugas
+    const urlParams = new URLSearchParams(window.location.search);
+    const taskId = urlParams.get('id'); // '1', '2', atau '3'
+    const storageKey = "status_tugas" + taskId;
+
+    // Info Tugas (Untuk simulasi deadline)
+    const taskData = {
+        "1": { title: "Tugas 1: Flowchart", due: "Last Week", isExpired: true },
+        "2": { title: "Tugas 2: Looping", due: "Yesterday", isExpired: true }, // Expired
+        "3": { title: "Tugas 3: Pointer", due: "Tomorrow", isExpired: false }  // Belum Expired
+    };
+    
+    // Set UI Awal
+    const task = taskData[taskId] || { title: "Tugas", due: "-", isExpired: false };
+    document.getElementById("taskTitle").innerText = "Submission status - " + task.title;
+    document.getElementById("dueDateCell").innerText = task.due;
+
+    // 2. Cek Status Saat Ini
+    const currentStatus = localStorage.getItem(storageKey) || "pending";
+    updateTableUI(currentStatus);
+
+    function updateTableUI(status) {
+        const statusCell = document.getElementById("statusCell");
+        const fileCell = document.getElementById("fileCell");
+
+        if (status === "done") {
+            // Hijau (Tepat Waktu)
+            statusCell.className = "bg-success-light";
+            statusCell.innerText = "Submitted for grading";
+            fileCell.innerHTML = `<a href="#" class="file-link"><i class="fa-solid fa-file-pdf"></i> Tugas${taskId}.pdf</a>`;
+        } 
+        else if (status === "late") {
+            // Merah (Sudah submit, tapi telat)
+            statusCell.className = "bg-danger-light";
+            statusCell.innerText = "Submitted late";
+            fileCell.innerHTML = `<a href="#" class="file-link"><i class="fa-solid fa-file-pdf"></i> Tugas${taskId}.pdf</a> <span style='color:red; font-size:12px;'>(LATE)</span>`;
+        } 
+        else if (status === "overdue") {
+            // Merah (Belum submit, sudah lewat)
+            statusCell.className = "bg-danger-light";
+            statusCell.innerText = "Overdue (No attempt)";
+            fileCell.innerHTML = `<span style="color:red;">Assignment is overdue!</span>`;
+        }
+        else {
+            // Kuning (Belum submit, masih ada waktu)
+            statusCell.className = "bg-warning-light";
+            statusCell.innerText = "No attempt";
+            fileCell.innerHTML = `<span style="color:#888;">(No file uploaded)</span>`;
+        }
+    }
+
+    // 3. LOGIKA SUBMIT PINTAR
     function submitTugas() {
-        alert("Tugas berhasil tersubmit!");
-        localStorage.setItem("tugas5Status", "selesai");
+        // Cek apakah tugas ini sudah expired?
+        if (task.isExpired) {
+            // Jika expired (Tugas 1 & 2), simpan sebagai 'late' (Tetap Merah)
+            localStorage.setItem(storageKey, "late");
+            alert("Tugas disubmit TERLAMBAT. Status akan merah.");
+        } else {
+            // Jika belum expired (Tugas 3), simpan sebagai 'done' (Hijau)
+            localStorage.setItem(storageKey, "done");
+            alert("Tugas disubmit TEPAT WAKTU. Status akan hijau.");
+        }
+        
+        recalculateProgress();
         window.location.href = "tugas_view.html";
     }
 
-    // FUNGSI BARU: Remove Submission
+    // 4. Remove
     function removeTugas() {
-        if (confirm("Apakah Anda yakin ingin menghapus submission ini?")) {
-            // Menghapus status tugas 5 dari memori browser
-            localStorage.removeItem("tugas5Status");
+        if(confirm("Hapus submission?")) {
+            // Jika dihapus, cek apakah dia expired atau tidak untuk status kembalinya
+            if(task.isExpired) {
+                localStorage.setItem(storageKey, "overdue"); // Balik ke Overdue (Merah)
+            } else {
+                localStorage.setItem(storageKey, "pending"); // Balik ke Pending (Kuning)
+            }
             
-            alert("Submission telah dihapus.");
-            
-            // Redirect kembali ke daftar tugas
-            // Sekarang statusnya akan kembali menjadi "Belum Submit"
-            // Dan Progress Bar di Dashboard/Course akan kembali ke 50%
+            recalculateProgress();
             window.location.href = "tugas_view.html";
         }
+    }
+
+    // 5. Hitung Progress Global
+    function recalculateProgress() {
+        let completedCount = 0;
+        for (let i = 1; i <= 3; i++) {
+            const s = localStorage.getItem("status_tugas" + i);
+            // 'done' (Hijau) dan 'late' (Merah) dihitung sebagai progress
+            if (s === "done" || s === "late") {
+                completedCount++;
+            }
+        }
+        const percentage = Math.round((completedCount / 3) * 100);
+        localStorage.setItem("algoProgress", percentage);
     }
 </script>
 
