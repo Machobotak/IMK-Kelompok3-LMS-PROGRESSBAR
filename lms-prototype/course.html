@@ -11,11 +11,8 @@
 
   <header>
     <div class="logo-area">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
-      <div>
-        <h3 style="font-size: 14px; color: #d32f2f; margin:0;">UNIVERSITAS</h3>
-        <h3 style="font-size: 14px; color: #333; margin:0;">MUHAMMADIYAH MALANG</h3>
-      </div>
+      <img src="images/logo-umm.png" alt="Logo UMM" class="logo-img">
+      
     </div>
     <button class="back-btn" onclick="window.location.href='dashboard.html'">← Kembali</button>
   </header>
@@ -36,20 +33,25 @@
 
     <div class="box">
       <h3>
-        <a href="tugas_view.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px; width: 100%;">
-            Tugas <span style="font-size: 12px; color: #666;"></span>
-        </a>
-      </h3>
-      
-      <p>1️⃣ Tugas 1: Buat flowchart menghitung nilai rata-rata</p>
-      <p>2️⃣ Tugas 2: Program C sederhana dengan looping</p>
+        <a href="tugas_view.html"
+       style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:8px;">
+      📘 Tugas
+    </a>
+  </h3>
 
-      <div class="progress-wrapper">
-        <div style="font-size:12px; margin-bottom:5px;">Progress Tugas</div>
-        <div class="progress-track" style="background: #eee; height: 10px; border-radius: 5px;">
-            <div id="courseProgressFill" style="width: 0%; height: 100%; background: #28a745; transition: 0.5s;"></div>
-        </div>
-        <div id="courseProgressText" style="font-size:12px; text-align:right;">0%</div>
+  <p id="taskText1">⏳ Tugas 1: Flowchart Dasar</p>
+  <p id="taskText2">⏳ Tugas 2: Looping & Array</p>
+  <p id="taskText3">⏳ Tugas 3: Pointer & Struct</p>
+
+  <div class="progress-wrapper">
+    <div style="font-size:12px; margin-bottom:5px;">Progress Tugas</div>
+    <div class="progress-track"
+         style="background:#eee; height:10px; border-radius:5px;">
+      <div id="courseProgressFill"
+           style="width:0%; height:100%; background:#28a745; transition:0.5s;"></div>
+    </div>
+    <div id="courseProgressText"
+         style="font-size:12px; text-align:right;">0%</div>
       </div>
     </div>
   </div>
@@ -57,39 +59,45 @@
   <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
 
   <script>
-    window.onload = function() {
-        // Init (NIM, dll)
-        const nim = localStorage.getItem("nim");
-        if(nim && document.getElementById("nimDisplay")) document.getElementById("nimDisplay").innerText = "NIM: " + nim;
-        
-        if(document.getElementById("logoutBtn")) {
-            document.getElementById("logoutBtn").addEventListener("click", () => {
-                localStorage.clear(); window.location.href = "index.html";
-            });
-        }
+    window.onload = function () {
 
-        // === HITUNG PROGRESS BAR ===
-        let completedCount = 0;
-        const totalTasks = 3;
+  let selesai = 0;
+  const total = 3;
 
-        for (let i = 1; i <= 3; i++) {
-            const s = localStorage.getItem("status_tugas" + i);
-            if (s === "done" || s === "late") {
-                completedCount++;
-            }
-        }
+  for (let i = 1; i <= total; i++) {
+    const status = localStorage.getItem("status_tugas" + i) || "pending";
+    const el = document.getElementById("taskText" + i);
 
-        const persen = Math.round((completedCount / totalTasks) * 100);
+    if (!el) continue;
 
-        const fill = document.getElementById("courseProgressFill");
-        const text = document.getElementById("courseProgressText");
+    if (status === "done") {
+      el.innerHTML = "✅ Tugas " + i + ": Selesai";
+      el.style.color = "#28a745";
+      selesai++;
 
-        if (fill && text) {
-            fill.style.width = persen + "%";
-            text.innerText = persen + "%";
-            if(persen === 100) fill.style.backgroundColor = "#28a745";
-        }
-    };
+    } else if (status === "late") {
+      el.innerHTML = "⚠️ Tugas " + i + ": Selesai (Terlambat)";
+      el.style.color = "#d32f2f";
+      selesai++;
+
+    } else if (status === "overdue") {
+      el.innerHTML = "❌ Tugas " + i + ": Terlambat (Belum Submit)";
+      el.style.color = "#d32f2f";
+
+    } else {
+      el.innerHTML = "⏳ Tugas " + i + ": Belum Submit";
+      el.style.color = "#f39c12";
+    }
+  }
+
+  const persen = Math.round((selesai / total) * 100);
+
+  document.getElementById("courseProgressFill").style.width = persen + "%";
+  document.getElementById("courseProgressText").innerText = persen + "%";
+
+  // simpan biar bisa dipakai dashboard
+  localStorage.setItem("algoProgress", persen);
+};
   </script>
 </body>
 </html>

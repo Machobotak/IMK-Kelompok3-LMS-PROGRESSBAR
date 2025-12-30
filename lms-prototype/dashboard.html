@@ -465,9 +465,9 @@ footer{
                 <div class="course-name">Algoritma Pemrograman (D)</div>
 
                 <div class="progress-track">
-                    <div class="progress-fill" style="width:0%"></div>
+                    <div class="progress-fill" id="algoProgressFill"></div>
                 </div>
-                <div class="progress-text">0%</div>
+                <div class="progress-text" id="algoProgressText">0%</div>
 
                 <div class="card-footer">
                     🔓
@@ -482,9 +482,28 @@ footer{
 </div>
 
 <script>
+window.onload = function () {
+    // === AMBIL PROGRESS DARI COURSE ===
+    const persen = localStorage.getItem("algoProgress") || 0;
+
+    const fill = document.getElementById("algoProgressFill");
+    const text = document.getElementById("algoProgressText");
+
+    if (fill && text) {
+        fill.style.width = persen + "%";
+        text.innerText = persen + "%";
+
+        if (persen == 100) {
+            fill.style.backgroundColor = "#28a745";
+        }
+    }
+}
+
 const avatar = document.getElementById("userAvatar");
 const userDropdown = document.getElementById("userDropdown");
 const logoutBtn = document.getElementById("logoutBtn");
+
+
 
 const webBtn = document.getElementById("webBtn");
 const webDropdown = document.getElementById("webDropdown");
