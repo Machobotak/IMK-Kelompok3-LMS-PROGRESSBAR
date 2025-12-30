@@ -1,112 +1,540 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS Dashboard UMM</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:60px;
+    height:100vh;
+    background:#8B0000;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:15px;
+
+    /* ⬇️ PEMISAH VISUAL */
+    box-shadow: 4px 0 15px rgba(0,0,0,0.35);
+
+    /* Garis halus di kanan */
+    border-right: 1px solid rgba(255,255,255,0.15);
+
+    z-index:300;
+}
+
+.sidebar a, 
+.sidebar button{
+    color:white;
+    background:none;
+    border:none;
+    font-size:22px;
+    margin:18px 0;
+    cursor:pointer;
+    text-decoration:none;
+
+    transition: 
+        background 0.2s ease,
+        transform 0.2s ease;
+    padding:8px;
+    border-radius:8px;
+}
+
+.sidebar a:hover,
+.sidebar button:hover{
+    background: rgba(255,255,255,0.15);
+    transform: translateX(2px);
+}
+
+/* ================= TOP NAVBAR ================= */
+.top-navbar{
+    position:fixed;
+    top:0;
+    left:60px;
+    right:0;
+    height:60px;
+    background:white;
+    border-bottom:1px solid #ddd;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    z-index:200;
+}
+
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.nav-left img{
+    height:36px;
+}
+
+.nav-menu a{
+    margin:0 10px;
+    font-size:14px;
+    font-weight:500;
+    color:#d32f2f;
+    text-decoration:none;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    position:relative;
+}
+
+.nav-icon{
+    font-size:18px;
+    cursor:pointer;
+}
+
+.nav-action{
+    position:relative;
+}
+
+.nav-dropdown{
+    position:absolute;
+    top:45px;
+    right:0;
+    width:220px;
+    background:white;
+    color:#333;
+    border-radius:8px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+
+    opacity:0;
+    transform:translateY(-10px) scale(0.95);
+    pointer-events:none;
+
+    transition:all 0.25s ease;
+    z-index:998;
+}
+
+.nav-dropdown.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+}
+
+.dropdown-title{
+    padding:10px 15px;
+    font-weight:600;
+    font-size:13px;
+    border-bottom:1px solid #eee;
+    background:#f9f9f9;
+    border-radius:8px 8px 0 0;
+}
+
+.nav-dropdown a{
+    display:block;
+    padding:10px 15px;
+    font-size:14px;
+    text-decoration:none;
+    color:#333;
+}
+
+.nav-dropdown a:hover{
+    background:#f0f0f0;
+}
+
+.dropdown-empty{
+    padding:15px;
+    font-size:13px;
+    color:#777;
+    text-align:center;
+}
+
+/* ================= USER DROPDOWN ================= */
+.user-avatar{
+    width:32px;
+    height:32px;
+    background:#f1f1f1;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:18px;
+
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.user-avatar:hover{
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transform: scale(1.05);
+}
+
+.user-dropdown{
+    position:absolute;
+    top:60px;
+    right:0;
+    width:260px;
+    background:#8B0000;
+    color:white;
+    border-radius:8px;
+
+    /* SHADOW biar “ngambang” */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+
+    /* ANIMASI */
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    pointer-events: none;
+
+    transition: 
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    display:flex;
+    flex-direction:column;
+    z-index:999;
+}
+
+.user-dropdown.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.user-header{
+    padding:12px 15px;
+    border-bottom:1px solid rgba(255,255,255,.3);
+    font-size:13px;
+}
+
+.user-dropdown a,
+.user-dropdown .logout{
+    padding:10px 15px;
+    font-size:14px;
+    color:white;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.user-dropdown a:hover,
+.user-dropdown .logout:hover{
+    background:#a00000;
+}
+
+/* ================= MAIN ================= */
+.main-wrapper{
+    margin-left:60px;
+    margin-top:60px;
+}
+
+/* ================= HERO ================= */
+.hero{
+    background:#8B0000;
+    color:white;
+    padding:50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.hero-title-box{
+    background:rgba(0,0,0,.4);
+    padding:15px 20px;
+    margin-bottom:20px;
+    border-left:5px solid #d32f2f;
+}
+
+.hero-illustration{
+    width:200px;
+    height:200px;
+    background:white;
+    mask-image:url('https://cdn-icons-png.flaticon.com/512/3135/3135810.png');
+    -webkit-mask-image:url('https://cdn-icons-png.flaticon.com/512/3135/3135810.png');
+    mask-repeat:no-repeat;
+    mask-size:contain;
+}
+
+/* ================= COURSES ================= */
+.container{
+    padding:30px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:8px;
+    border:1px solid #eee;
+    overflow:hidden;
+    box-shadow:0 2px 5px rgba(0,0,0,.05);
+}
+
+.card-img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.tag{
+    background:#00bcd4;
+    color:white;
+    font-size:10px;
+    padding:2px 8px;
+    border-radius:3px;
+}
+
+.logo-img{
+    height:36px;
+    width:auto;
+    display:block;
+}
+
+.course-name{
+    font-size:14px;
+    font-weight:600;
+    color:#d32f2f;
+    margin:10px 0;
+}
+
+.progress-track{
+    height:8px;
+    background:#ddd;
+    border-radius:4px;
+}
+
+.progress-fill{
+    height:100%;
+    background:#4CAF50;
+}
+
+.progress-text{
+    font-size:10px;
+    text-align:right;
+    margin-top:2px;
+}
+
+.card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+}
+
+.btn-access{
+    background:#8B0000;
+    color:white;
+    border:none;
+    padding:5px 15px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    font-size:13px;
+    color:#666;
+}
+</style>
 </head>
-<body class="bg-dashboard">
 
-    <header>
-        <div class="logo-area">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_Universitas_Muhammadiyah_Malang.png/1200px-Logo_Universitas_Muhammadiyah_Malang.png" alt="UMM Logo" class="logo-img">
-            <div>
-                <h3 style="font-size: 14px; color: #d32f2f; line-height: 1;">UNIVERSITAS</h3>
-                <h3 style="font-size: 14px; color: #333; line-height: 1;">MUHAMMADIYAH MALANG</h3>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <button>☰</button>
+    <a href="dashboard.html">🏠</a>
+    <a href="coming-soon.html">📚</a>
+    <a href="coming-soon.html">👤</a>
+</div>
+
+<!-- TOP NAVBAR -->
+<div class="top-navbar">
+    <div class="nav-left">
+        <img src="images/logo-umm.png" alt="Logo UMM" class="logo-img">
+        <div class="nav-menu">
+            <a href="dashboard.html">HOME</a>
+            <a href="coming-soon.html">ABOUT US</a>
+            <a href="coming-soon.html">GUIDE</a>
+            <a href="coming-soon.html">CERTIFICATES</a>
+            <a href="coming-soon.html">SEARCH MK</a>
+            <a href="coming-soon.html">FAQ</a>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <div class="nav-action">
+        <span class="nav-icon" id="webBtn">🌐</span>
+        <div class="nav-dropdown" id="webDropdown">
+            <div class="dropdown-title">Website</div>
+            <a href="https://www.umm.ac.id" target="_blank">🌍 UMM Official</a>
+            <a href="coming-soon.html">🌐 English</a>
+            <a href="coming-soon.html">🇮🇩 Indonesia</a>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION -->
+    <div class="nav-action">
+        <span class="nav-icon" id="notifBtn">🔔</span>
+        <div class="nav-dropdown" id="notifDropdown">
+            <div class="dropdown-title">Notifications</div>
+            <div class="dropdown-empty">
+                Tidak ada notifikasi baru
             </div>
         </div>
-        <div class="user-info">
-            <span class="nim-text" id="nimDisplay"></span>
-            <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+
+    <!-- USER -->
+    <div class="user-avatar" id="userAvatar">👤</div>
+
+    <div class="user-dropdown" id="userDropdown">
+        <div class="user-header">
+            <strong id="nimText">202410370110123</strong><br>
+            <small>Muhammad Ibrahim Al-Ayubi</small>
         </div>
-    </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-title-box"><h1>Polysynchronous Learning Design</h1></div>
-            <p>Model pembelajaran bauran yang dikembangkan UMM menggabungkan konsep Student Centered Learning (SCL) dan Personalized Learning (PL).</p>
+        <a href="dashboard.html">👤 Dashboard</a>
+        <a href="coming-soon.html">📄 Profile</a>
+        <a href="coming-soon.html">📊 Grades</a>
+        <a href="coming-soon.html">💬 Messages</a>
+        <a href="coming-soon.html">⚙ Preferences</a>
+
+        <div class="logout" id="logoutBtn">🚪 Log out</div>
         </div>
-        <div class="hero-illustration"></div>
-    </section>
+    </div>
+</div>
 
-    <main class="container">
-        <div style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h2 class="section-title">My Courses</h2>
-            <div class="course-grid">
-                
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db" class="card-img">
-                    <div class="card-body">
-                        <div><span class="tag">Informatika</span><div class="course-name">Interaksi Manusia Komputer (D)</div></div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
-                            <div class="progress-text">50%</div>
-                        </div>
-                        <div class="card-footer"><span class="lock-icon">🔒</span><button class="btn-access">Access</button></div>
-                    </div>
+<div class="main-wrapper">
+
+<section class="hero">
+    <div>
+        <div class="hero-title-box">
+            <h1>Polysynchronous Learning Design</h1>
+        </div>
+        <p>
+            Model pembelajaran bauran yang dikembangkan UMM yang menggabungkan
+            konsep Student Centered Learning (SCL) dan Personalized Learning (PL).
+        </p>
+    </div>
+    <div class="hero-illustration"></div>
+</section>
+
+<main class="container">
+    <h2 class="section-title">My Courses</h2>
+
+    <div class="course-grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4" class="card-img">
+            <div class="card-body">
+                <span class="tag">Informatika</span>
+                <div class="course-name">Algoritma Pemrograman (D)</div>
+
+                <div class="progress-track">
+                    <div class="progress-fill" style="width:0%"></div>
                 </div>
+                <div class="progress-text">0%</div>
 
-                <div class="card" id="cardAlgo">
-                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4" class="card-img">
-                    <div class="card-body">
-                        <div><span class="tag">Informatika</span><div class="course-name">Algoritma Pemrograman (D)</div></div>
-                        <div class="progress-wrapper">
-                            <div class="progress-track"><div class="progress-fill" id="algoProgressFill" style="width: 0%;"></div></div>
-                            <div class="progress-text" id="algoProgressText">0%</div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="lock-icon">🔓</span>
-                            <button class="btn-access" onclick="window.location.href='course.html'">Access</button>
-                        </div>
-                    </div>
+                <div class="card-footer">
+                    🔓
+                    <button class="btn-access" onclick="window.location.href='course.html'">Access</button>
                 </div>
-
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
+<footer>Universitas Muhammadiyah Malang | www.umm.ac.id</footer>
+</div>
 
-   <script>
-    window.onload = function() {
-        // Init (NIM, dll)
-        const nim = localStorage.getItem("nim");
-        if(nim && document.getElementById("nimDisplay")) document.getElementById("nimDisplay").innerText = "NIM: " + nim;
-        
-        if(document.getElementById("logoutBtn")) {
-            document.getElementById("logoutBtn").addEventListener("click", () => {
-                localStorage.clear(); window.location.href = "index.html";
-            });
-        }
+<script>
+const avatar = document.getElementById("userAvatar");
+const userDropdown = document.getElementById("userDropdown");
+const logoutBtn = document.getElementById("logoutBtn");
 
-        // === HITUNG PROGRESS BAR ===
-        let completedCount = 0;
-        const totalTasks = 3;
+const webBtn = document.getElementById("webBtn");
+const webDropdown = document.getElementById("webDropdown");
 
-        for (let i = 1; i <= 3; i++) {
-            const s = localStorage.getItem("status_tugas" + i);
-            // Kita hitung 'done' (tepat waktu) dan 'late' (terlambat) sebagai SELESAI
-            if (s === "done" || s === "late") {
-                completedCount++;
-            }
-        }
+const notifBtn = document.getElementById("notifBtn");
+const notifDropdown = document.getElementById("notifDropdown");
 
-        const persen = Math.round((completedCount / totalTasks) * 100);
+// Ambil NIM
+const nim = localStorage.getItem("nim");
+if (nim) document.getElementById("nimText").innerText = nim;
 
-        // Update UI
-        const fill = document.getElementById("algoProgressFill") || document.getElementById("courseProgressFill");
-        const text = document.getElementById("algoProgressText") || document.getElementById("courseProgressText");
+// ====== HELPER ======
+function closeAllDropdowns(){
+    userDropdown.classList.remove("show");
+    webDropdown.classList.remove("show");
+    notifDropdown.classList.remove("show");
+}
 
-        if (fill && text) {
-            fill.style.width = persen + "%";
-            text.innerText = persen + "%";
-            
-            // Ubah warna bar jadi hijau penuh jika 100%
-            if(persen === 100) fill.style.backgroundColor = "#28a745";
-        }
-    };
+// ====== USER ======
+avatar.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    closeAllDropdowns();
+    userDropdown.classList.toggle("show");
+});
+
+// ====== WEB ======
+webBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    closeAllDropdowns();
+    webDropdown.classList.toggle("show");
+});
+
+// ====== NOTIF ======
+notifBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    closeAllDropdowns();
+    notifDropdown.classList.toggle("show");
+});
+
+// Klik luar nutup semua
+document.addEventListener("click",()=>{
+    closeAllDropdowns();
+});
+
+// Logout
+logoutBtn.addEventListener("click",()=>{
+    localStorage.clear();
+    window.location.href="index.html";
+});
 </script>
+
 </body>
 </html>
