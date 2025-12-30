@@ -492,3 +492,449 @@ footer {
   background-color: #fafafa;
   margin-top: 50px;
 }
+/* ===============================
+   RESPONSIVE COURSE (HP)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* === HEADER === */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .logo-area {
+    gap: 8px;
+  }
+
+  /* Tombol kembali full width */
+  .back-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* === TITLE & BREADCRUMB === */
+  .course-title {
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  .breadcrumb {
+    margin: 10px 20px 20px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* === CONTENT JADI 1 KOLOM === */
+  .content-section {
+    flex-direction: column;
+    margin: 20px;
+    gap: 20px;
+  }
+
+  /* === BOX === */
+  .box {
+    padding: 15px;
+  }
+
+  .box h3 {
+    font-size: 16px;
+  }
+
+  .box p {
+    font-size: 13px;
+  }
+
+  /* === PROGRESS === */
+  .progress-wrapper {
+    margin-top: 15px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+/* ===============================
+   RESPONSIVE TASK LIST (HP)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* === HEADER === */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .logo-area {
+    gap: 8px;
+  }
+
+  header .back-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* === TITLE & BREADCRUMB === */
+  .course-title {
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  .breadcrumb {
+    margin: 10px 20px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+
+  .section-header {
+    font-size: 18px;
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  /* === TASK LIST === */
+  .task-list {
+    margin: 20px;
+    gap: 15px;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .task-left {
+    gap: 12px;
+  }
+
+  .task-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* Badge pindah ke bawah */
+  .task-item span {
+    align-self: flex-end;
+    font-size: 11px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    font-size: 12px;
+    padding: 15px;
+  }
+
+  /* === RESET BUTTON (DEV ONLY) === */
+  button[onclick="resetData()"] {
+    right: 10px;
+    bottom: 10px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+/* ===============================
+   RESPONSIVE COURSE PAGE (HP)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* === HEADER === */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .logo-area {
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 36px;
+  }
+
+  .back-btn {
+    align-self: flex-start;
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  /* === COURSE TITLE === */
+  .course-title {
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  /* === BREADCRUMB === */
+  .breadcrumb {
+    margin: 15px 20px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* === CONTENT SECTION === */
+  .content-section {
+    flex-direction: column;
+    margin: 20px;
+    gap: 20px;
+  }
+
+  .box {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .box h3 {
+    font-size: 15px;
+  }
+
+  .box p {
+    font-size: 13px;
+  }
+
+  /* === TASK TEXT === */
+  #taskText1,
+  #taskText2,
+  #taskText3 {
+    font-size: 13px;
+  }
+
+  /* === PROGRESS BAR === */
+  .progress-wrapper {
+    margin-top: 12px;
+  }
+
+  .progress-track {
+    height: 8px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+/* ===============================
+   RESPONSIVE TASK VIEW (HP)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* === HEADER === */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px 20px;
+  }
+
+  .logo-area {
+    gap: 10px;
+  }
+
+  .logo-img {
+    height: 36px;
+  }
+
+  .back-btn {
+    font-size: 13px;
+    padding: 6px 12px;
+    align-self: flex-start;
+  }
+
+  /* === COURSE TITLE === */
+  .course-title {
+    font-size: 18px;
+    padding: 15px 20px;
+    text-align: left;
+  }
+
+  /* === BREADCRUMB === */
+  .breadcrumb {
+    margin: 15px 20px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* === SECTION HEADER === */
+  .section-header {
+    font-size: 16px;
+    padding: 12px;
+    margin: 0 15px 15px;
+  }
+
+  /* === TASK LIST === */
+  .task-list {
+    margin: 15px;
+    gap: 15px;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  /* kiri (icon + teks) */
+  .task-left {
+    gap: 12px;
+  }
+
+  .task-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .task-item strong {
+    font-size: 14px;
+  }
+
+  .task-item div div {
+    font-size: 12px;
+  }
+
+  /* badge (status) */
+  .task-item span {
+    align-self: flex-end;
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    font-size: 12px;
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  /* === RESET BUTTON === */
+  button[onclick="resetData()"] {
+    bottom: 15px;
+    right: 15px;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+/* ===============================
+   RESPONSIVE COURSE (HP)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* === HEADER === */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .back-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* === COURSE TITLE === */
+  .course-title {
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  /* === BREADCRUMB === */
+  .breadcrumb {
+    margin: 10px 20px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* === CONTENT SECTION === */
+  .content-section {
+    flex-direction: column;
+    margin: 20px;
+    gap: 20px;
+  }
+
+  /* === BOX === */
+  .box {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .box h3 {
+    font-size: 16px;
+  }
+
+  .box p {
+    font-size: 14px;
+  }
+
+  /* === PROGRESS === */
+  .progress-wrapper {
+    margin-top: 15px;
+  }
+
+  .progress-track {
+    height: 10px;
+  }
+
+  .progress-text {
+    font-size: 11px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+/* ===============================
+   RESPONSIVE LOGIN (HP)
+   =============================== */
+@media (max-width: 480px) {
+
+  .login-container {
+    padding: 15px;
+  }
+
+  .login-box {
+    width: 100%;
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .login-box h2 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .login-box p {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .login-box input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .login-box button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
+

@@ -370,6 +370,78 @@ footer{
     font-size:13px;
     color:#666;
 }
+/* ===============================
+   RESPONSIVE MOBILE (HP)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* === SIDEBAR DISEMBUNYIKAN === */
+  .sidebar {
+    display: none;
+  }
+
+  /* === NAVBAR FULL WIDTH === */
+  .top-navbar {
+    left: 0;
+    padding: 0 15px;
+  }
+
+  /* === MAIN WRAPPER RESET === */
+  .main-wrapper {
+    margin-left: 0;
+    margin-top: 60px;
+  }
+
+  /* === HERO JADI KOLOM === */
+  .hero {
+    flex-direction: column;
+    padding: 25px 20px;
+    text-align: left;
+  }
+
+  .hero-title-box {
+    margin-bottom: 15px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  .hero-illustration {
+    width: 140px;
+    height: 140px;
+    margin-top: 20px;
+  }
+
+  /* === CONTAINER PADDING KECIL === */
+  .container {
+    padding: 20px;
+  }
+
+  /* === GRID COURSE 1 KOLOM === */
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* === CARD === */
+  .card-img {
+    height: 160px;
+  }
+
+  /* === NAV MENU DISEMBUNYIKAN (HOME, ABOUT, dll) === */
+  .nav-menu {
+    display: none;
+  }
+
+  /* === DROPDOWN BIAR AMAN DI HP === */
+  .nav-dropdown,
+  .user-dropdown {
+    right: 10px;
+    width: 90vw;
+    max-width: 320px;
+  }
+}
+
 </style>
 </head>
 
